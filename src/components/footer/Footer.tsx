@@ -16,7 +16,11 @@ const Footer = () => {
         mx="auto"
         gap={4}
       >
-        <Text fontSize="sm" color="gray.400" textAlign="center">
+        <Text
+          fontSize="sm"
+          color="gray.400"
+          textAlign="center"
+        >
           © {new Date().getFullYear()} My movie list. All rights reserved.
         </Text>
 

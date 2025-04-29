@@ -1,6 +1,4 @@
-
 import { Flex, Heading, Link } from '@chakra-ui/react';
-
 
 const Header = () => {
   return (
@@ -14,23 +12,32 @@ const Header = () => {
       zIndex={100}
       justify="center"
       align="center"
-      > 
-      <Flex flex={1}  maxW="1200px" mx="auto">
+    >
+      <Flex
+        flex={1}
+        maxW="1200px"
+        mx="auto"
+      >
         <Flex
           align="center"
           flex={1}
-          gap={5}>
-          <Heading as="h1" size="lg" color="white">
+          gap={5}
+        >
+          <Heading
+            as="h1"
+            size="lg"
+            color="white"
+          >
             My Movie List
           </Heading>
           <Link
-            href='/Movies/MovieList'
+            href="/Movies/MovieList"
             fontSize="md"
           >
             Movies
           </Link>
           <Link
-            href='/Movies/Favorites'
+            href="/Movies/Favorites"
             fontSize="md"
           >
             Favorites
