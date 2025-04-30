@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router';
 import Home from './pages/home/Home';
-import MovieDetails from './pages/Movies/MovieDetails';
+import MovieDetails from './pages/movies/movies-details/MovieDetails';
 import Layout from './pages/Layout';
-import Favorites from './pages/Movies/Favorites';
+import Favorites from './pages/movies/Favorites';
 
 const router = createBrowserRouter([
   {

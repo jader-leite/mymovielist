@@ -1,5 +1,5 @@
 import { Footer, Header } from '../components';
-import { Box, SimpleGrid } from '@chakra-ui/react';
+import { SimpleGrid } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
 
 const Layout = () => (
