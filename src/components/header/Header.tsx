@@ -1,21 +1,26 @@
-import { Flex, Heading, Link } from '@chakra-ui/react';
+import { Box, Flex, Link } from '@chakra-ui/react';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+
+import LogoIcon from '../../assets/Icons/LogoIcon';
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <Flex
       as="header"
       bg="purple.700"
-      p={4}
       boxShadow="md"
       position="sticky"
       top={0}
       zIndex={100}
       justify="center"
       align="center"
+      px={{ base: 3, sm: 4, md: 30, lg: 60, lgToXl: 50, xl: 180 }}
+      maxH={100}
     >
       <Flex
         flex={1}
-        maxW="1200px"
         mx="auto"
       >
         <Flex
@@ -23,22 +28,23 @@ const Header = () => {
           flex={1}
           gap={5}
         >
-          <Heading
-            as="h1"
-            size="lg"
+          <Box
+            onClick={() => navigate('/')}
+            cursor="pointer"
+            aria-label="Navigate to homepage"
+          >
+            <LogoIcon
+              width={150}
+              height={75}
+            />
+          </Box>
+
+          <Link
+            as={RouterLink}
+            to="/favorites"
+            fontSize="md"
             color="white"
-          >
-            My Movie List
-          </Heading>
-          <Link
-            href="/Movies/MovieList"
-            fontSize="md"
-          >
-            Movies
-          </Link>
-          <Link
-            href="/Movies/Favorites"
-            fontSize="md"
+            _hover={{ textDecoration: 'underline' }}
           >
             Favorites
           </Link>
