@@ -1,28 +1,113 @@
-import { searchMovies } from '../../services/omdbApi';
-import { Movie } from '@/types';
-import { Box, Flex, Heading, IconButton, Input, SimpleGrid, Spinner, Text, Image } from '@chakra-ui/react';
+import { useMovies } from '../../hooks/useMovies';
+import { MovieCard, EmptyState } from '../../components';
+
+import {
+  ButtonGroup,
+  Flex,
+  Heading,
+  IconButton,
+  Input,
+  Pagination,
+  SimpleGrid,
+  Spinner,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 import { useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
+import { TbMovieOff } from 'react-icons/tb';
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
+import { useMyMovieListStore } from '../../stores';
 
 function Home() {
   const [query, setQuery] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const { searchQuery, setSearchQuery, currentPage, setCurrentPage } = useMyMovieListStore();
+  const { loading, data: movies, totalResults, isEmpty } = useMovies(searchQuery, currentPage);
 
-  const fetchMovies = async (searchQuery: string) => {
-    setLoading(true);
-    try {
-      const data = await searchMovies(searchQuery);
-      if (data.Search) {
-        setMovies(data.Search);
-      } else {
-        setMovies([]);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
+  const handleSearch = () => {
+    setCurrentPage(1);
+    setSearchQuery(query);
+  };
+  const totalPages = Math.ceil(totalResults / 10);
+
+  const renderHomeContent = () => {
+    if (loading) {
+      return (
+        <Flex
+          justify="center"
+          color="purple.950"
+        >
+          <Spinner size="xl" />
+        </Flex>
+      );
     }
+
+    if (isEmpty) {
+      return (
+        <EmptyState
+          title="No movies found"
+          description="Try adjusting your search"
+          icon={<TbMovieOff />}
+        />
+      );
+    }
+
+    return (
+      <Stack
+        gap={5}
+        align="center"
+      >
+        <Text
+          mb={4}
+          color="purple.700"
+        >
+          {totalResults} movies found
+        </Text>
+        <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }}>
+          {movies.map((movie) => (
+            <MovieCard
+              key={movie.imdbID}
+              {...movie}
+            />
+          ))}
+        </SimpleGrid>
+        <Pagination.Root
+          count={totalPages}
+          pageSize={1}
+          page={currentPage}
+          onPageChange={(e) => setCurrentPage(e.page)}
+        >
+          <ButtonGroup
+            variant="ghost"
+            size="sm"
+          >
+            <Pagination.PrevTrigger
+              bg={{ base: 'transparent', _hover: 'purple.600' }}
+              asChild
+            >
+              <IconButton color={{ base: 'purple.950', _hover: 'white' }}>
+                <HiChevronLeft />
+              </IconButton>
+            </Pagination.PrevTrigger>
+
+            <Pagination.Items
+              color={{ base: 'purple.950', _hover: 'white' }}
+              bg={{ base: 'transparent', _hover: 'purple.600' }}
+              render={(page) => <IconButton variant={{ base: 'ghost', _selected: 'outline' }}>{page.value}</IconButton>}
+            />
+
+            <Pagination.NextTrigger
+              bg={{ base: 'transparent', _hover: 'purple.600' }}
+              asChild
+            >
+              <IconButton color={{ base: 'purple.950', _hover: 'white' }}>
+                <HiChevronRight />
+              </IconButton>
+            </Pagination.NextTrigger>
+          </ButtonGroup>
+        </Pagination.Root>
+      </Stack>
+    );
   };
 
   return (
@@ -30,7 +115,8 @@ function Home() {
       minHeight="100vh"
       direction="column"
       flex={1}
-      py={8}
+      py={10}
+      px={{ base: 3, sm: 4, md: 30, lg: 60, lgToXl: 50, xl: 150 }}
     >
       <Heading
         size={{ base: '4xl', md: '6xl' }}
@@ -43,7 +129,7 @@ function Home() {
         mb={12}
         color="purple.700"
       >
-        Find your new favorite movie today! 🎥
+        Find your new favorite movie today!
       </Text>
 
       <Flex
@@ -64,6 +150,9 @@ function Home() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           color="purple.800"
+          onKeyUp={(e) => {
+            e.key === 'Enter' && handleSearch();
+          }}
         />
         <IconButton
           size="sm"
@@ -71,53 +160,12 @@ function Home() {
           borderRadius="2xl"
           position="absolute"
           right={0}
-          onClick={() => fetchMovies(query)}
+          onClick={() => handleSearch()}
         >
           <CiSearch />
         </IconButton>
       </Flex>
-      {loading ? (
-        <Flex
-          justify="center"
-          color="purple.950"
-        >
-          <Spinner size="xl" />
-        </Flex>
-      ) : (
-        <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 4 }}>
-          {movies.map((movie) => (
-            <Box
-              key={movie.imdbID}
-              bg="purple.900"
-              p={4}
-              borderRadius="md"
-              _hover={{ transform: 'scale(1.05)', transition: '0.3s' }}
-              m={2}
-            >
-              <Image
-                src={movie.Poster !== 'N/A' ? movie.Poster : 'https://via.placeholder.com/300x450?text=No+Image'}
-                alt={movie.Title}
-                borderRadius="md"
-                mb={4}
-              />
-              <Text
-                fontSize="lg"
-                fontWeight="bold"
-                color="white"
-              >
-                {movie.Title}
-              </Text>
-
-              <Text
-                fontSize="sm"
-                color="gray.400"
-              >
-                {movie.Year}
-              </Text>
-            </Box>
-          ))}
-        </SimpleGrid>
-      )}
+      {renderHomeContent()}
     </Flex>
   );
 }
