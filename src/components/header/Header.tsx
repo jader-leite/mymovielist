@@ -41,6 +41,15 @@ const Header = () => {
 
           <Link
             as={RouterLink}
+            to="/"
+            fontSize="md"
+            color="white"
+            _hover={{ textDecoration: 'underline' }}
+          >
+            Home
+          </Link>
+          <Link
+            as={RouterLink}
             to="/favorites"
             fontSize="md"
             color="white"
