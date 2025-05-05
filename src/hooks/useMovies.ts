@@ -2,7 +2,7 @@ import { searchMovies } from '../services/omdbApi';
 import { Movie } from '@/types';
 import { useState, useEffect, useCallback } from 'react';
 
-const DEBOUNCE_DELAY = 500;
+const DEBOUNCE_DELAY = 200;
 
 export const useMovies = (search: string, page: number) => {
   const [data, setData] = useState<Movie[]>([]);
