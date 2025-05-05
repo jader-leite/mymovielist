@@ -1,13 +1,16 @@
-import { Box, Image, Text } from '@chakra-ui/react';
+import { Image, Text, Stack } from '@chakra-ui/react';
 import { Movie as MovieCardProps } from '@/types';
 import { useNavigate } from 'react-router-dom';
 
 import PosterNotFound from '../../assets/images/poster-not-found.png';
+import { useState } from 'react';
 
 const MovieCard = (props: MovieCardProps) => {
   const navigate = useNavigate();
+  const [posterImg, setPosterImg] = useState(props.Poster);
+
   return (
-    <Box
+    <Stack
       bg="purple.900"
       borderRadius="md"
       _hover={{ transform: 'scale(1.05)', transition: '0.3s' }}
@@ -17,10 +20,12 @@ const MovieCard = (props: MovieCardProps) => {
       cursor="button"
     >
       <Image
-        src={props.Poster !== 'N/A' ? props.Poster : PosterNotFound}
+        src={posterImg}
         alt={props.Title}
         borderRadius="md"
         w={'100%'}
+        h={'100%'}
+        onError={() => setPosterImg(PosterNotFound)}
       />
 
       <Text
@@ -37,7 +42,7 @@ const MovieCard = (props: MovieCardProps) => {
       >
         {props.Year}
       </Text>
-    </Box>
+    </Stack>
   );
 };
 
