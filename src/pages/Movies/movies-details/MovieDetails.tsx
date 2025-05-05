@@ -13,9 +13,12 @@ function MovieDetails() {
 
   if (!movie)
     return (
-      <div>
-        <h1>OIII</h1>
-      </div>
+      <Flex
+        justify="center"
+        color="purple.950"
+      >
+        <Spinner size="xl" />
+      </Flex>
     );
 
   return (
@@ -35,26 +38,25 @@ function MovieDetails() {
           height="100%"
           py={10}
         >
-          {bgPosterUrl && (
-            <Image
-              src={bgPosterUrl}
-              alt="background"
-              position="absolute"
-              top={0}
-              left={0}
-              width="100%"
-              height="100%"
-              objectFit="cover"
-              zIndex={-2}
-            />
-          )}
+          <Image
+            src={bgPosterUrl || ''}
+            alt="background"
+            position="absolute"
+            top={0}
+            left={0}
+            width="100%"
+            height="100%"
+            objectFit="cover"
+            zIndex={-2}
+          />
+
           <Box
             position="absolute"
             top={0}
             left={0}
             width="100%"
             height="100%"
-            bg="rgba(0, 0, 0, 0.85)"
+            bg="rgba(68, 61, 61, 0.85)"
             zIndex={-1}
           />
 
@@ -70,6 +72,7 @@ function MovieDetails() {
                 src={movie.Poster !== 'N/A' ? movie.Poster : PosterNotFound}
                 alt={movie.Title}
                 borderRadius="md"
+                w={300}
               />
             </GridItem>
 
@@ -81,45 +84,45 @@ function MovieDetails() {
               px={{ base: 4, md: 50 }}
               color="white"
               colSpan={2}
+              justifyContent="space-between"
             >
-              <Text
-                fontSize="4xl"
-                fontWeight="bold"
-                mt={{ base: 5, md: 0 }}
-              >
-                {movie.Title} ({movie.Year})
-              </Text>
               <Flex
-                direction="row"
-                align="center"
-                wrap="wrap"
-                gap={2}
+                direction="column"
+                gap={5}
               >
-                <For each={genreList}>
-                  {(item, index) => (
-                    <Badge
-                      backgroundColor="purple.600"
-                      key={index}
-                    >
-                      {item}
-                    </Badge>
-                  )}
-                </For>
-                <Text fontWeight="bold"> {movie.Runtime}</Text>
+                <Text
+                  fontSize="4xl"
+                  fontWeight="bold"
+                  mt={{ base: 5, md: 0 }}
+                >
+                  {movie.Title} ({movie.Year})
+                </Text>
+                <Flex
+                  direction="row"
+                  align="center"
+                  wrap="wrap"
+                  gap={2}
+                >
+                  <For each={genreList}>
+                    {(item, index) => (
+                      <Badge
+                        backgroundColor="purple.600"
+                        key={index}
+                      >
+                        {item}
+                      </Badge>
+                    )}
+                  </For>
+                  <Text fontWeight="bold"> {movie.Runtime}</Text>
+                </Flex>
               </Flex>
 
-              <Text
-                fontStyle="italic"
-                fontSize={{ base: 'md', md: 'lg' }}
-                maxW="800px"
-              >
-                {movie.Plot}
-              </Text>
               <Flex
                 direction="row"
                 align="center"
                 wrap="wrap"
                 gap={2}
+                mt={{ base: 5, lg: 0 }}
               >
                 <FavoriteButton
                   movie={movie}
@@ -127,6 +130,15 @@ function MovieDetails() {
                 />
                 <TrailerModal trailerURL={trailerUrl || undefined} />
               </Flex>
+
+              <Text
+                fontStyle="italic"
+                fontSize={{ base: 'md', md: 'lg' }}
+                maxW="800px"
+                mt={{ base: 5, lg: 0 }}
+              >
+                {movie.Plot}
+              </Text>
             </VStack>
           </Grid>
         </Center>
