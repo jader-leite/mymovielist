@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import { createFavoritesSlice, FavoritesSlice } from './favorites.slice';
 import { createMoviesSlice, MoviesSlice } from './movies.slice';
 
@@ -13,6 +13,10 @@ export const useMyMovieListStore = create<MyMovieListStore>()(
     }),
     {
       name: 'my-movie-list',
+      storage: createJSONStorage(() => localStorage),
+      onRehydrateStorage: () => (state) => {
+        console.log('State rehydrated:', state);
+      },
     },
   ),
 );
