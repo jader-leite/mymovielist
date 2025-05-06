@@ -1,4 +1,4 @@
-import { Box, Text, Flex, Link } from '@chakra-ui/react';
+import { Box, Text, Flex } from '@chakra-ui/react';
 
 const Footer = () => {
   return (
@@ -21,27 +21,8 @@ const Footer = () => {
           color="gray.400"
           textAlign="center"
         >
-          © {new Date().getFullYear()} My movie list. All rights reserved.
+          © {new Date().getFullYear()} My movie list.
         </Text>
-
-        <Flex gap={4}>
-          <Link
-            href="#"
-            fontSize="sm"
-            color="gray.300"
-            _hover={{ color: 'teal.300' }}
-          >
-            Terms of use
-          </Link>
-          <Link
-            href="#"
-            fontSize="sm"
-            color="gray.300"
-            _hover={{ color: 'teal.300' }}
-          >
-            Privacy
-          </Link>
-        </Flex>
       </Flex>
     </Box>
   );
