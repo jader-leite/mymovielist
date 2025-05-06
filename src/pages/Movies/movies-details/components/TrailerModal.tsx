@@ -17,6 +17,7 @@ const TrailerModal = ({ trailerURL }: TrailerModalProps) => {
           p={4}
           bg="purple.700"
           color="white"
+          aria-label="Watch movie trailer"
         >
           <IoIosPlay color="white" /> Watch trailer
         </IconButton>
@@ -38,6 +39,7 @@ const TrailerModal = ({ trailerURL }: TrailerModalProps) => {
                     title="movie trailer"
                     src={trailerURL}
                     allowFullScreen
+                    aria-label="Movie trailer video player"
                   />
                 </AspectRatio>
               ) : (
@@ -48,7 +50,10 @@ const TrailerModal = ({ trailerURL }: TrailerModalProps) => {
               )}
             </Dialog.Body>
             <Dialog.CloseTrigger asChild>
-              <CloseButton size="sm" />
+              <CloseButton
+                size="sm"
+                aria-label="Close trailer modal"
+              />
             </Dialog.CloseTrigger>
           </Dialog.Content>
         </Dialog.Positioner>

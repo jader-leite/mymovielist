@@ -9,6 +9,13 @@ const MovieCard = (props: MovieCardProps) => {
   const navigate = useNavigate();
   const [posterImg, setPosterImg] = useState(props.Poster);
 
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      navigate(`/movies/${props.imdbID}`);
+    }
+  };
+
   return (
     <Stack
       bg="purple.900"
@@ -17,11 +24,15 @@ const MovieCard = (props: MovieCardProps) => {
       m={2}
       p={2}
       onClick={() => navigate(`/movies/${props.imdbID}`)}
+      onKeyUp={handleKeyPress}
       cursor="button"
+      role="button"
+      tabIndex={0}
+      aria-label={`View details for ${props.Title}`}
     >
       <Image
         src={posterImg}
-        alt={props.Title}
+        alt={`Poster for ${props.Title}`}
         borderRadius="md"
         w={'100%'}
         h={'100%'}

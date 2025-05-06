@@ -12,6 +12,17 @@ const MovieItemList = (props: MovieCardProps) => {
   const [posterImg, setPosterImg] = useState(props.Poster);
   const { removeFavorite } = useMyMovieListStore();
 
+  const handleKeyPress = (e: React.KeyboardEvent, action: 'view details' | 'remove') => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (action === 'view details') {
+        navigate(`/movies/${props.imdbID}`);
+      } else {
+        removeFavorite(props.imdbID);
+      }
+    }
+  };
+
   return (
     <HStack
       bg="purple.900"
@@ -19,11 +30,12 @@ const MovieItemList = (props: MovieCardProps) => {
       p={2}
       w="100%"
       justifyContent="space-between"
+      role="listitem"
     >
       <HStack gap={5}>
         <Image
           src={posterImg}
-          alt={props.Title}
+          alt={`Poster for ${props.Title}`}
           borderRadius="md"
           w={50}
           h={50}
@@ -35,6 +47,10 @@ const MovieItemList = (props: MovieCardProps) => {
           fontWeight="bold"
           color="white"
           onClick={() => navigate(`/movies/${props.imdbID}`)}
+          onKeyUp={(e) => handleKeyPress(e, 'view details')}
+          tabIndex={0}
+          role="link"
+          aria-label={`View details for ${props.Title}`}
         >
           {props.Title}
         </Link>
@@ -45,6 +61,10 @@ const MovieItemList = (props: MovieCardProps) => {
         fontWeight="bold"
         color="white"
         onClick={() => removeFavorite(props.imdbID)}
+        onKeyUp={(e) => handleKeyPress(e, 'remove')}
+        tabIndex={0}
+        role="button"
+        aria-label={`Remove ${props.Title} from favorites`}
         mr={3}
       >
         <IoMdRemoveCircle />

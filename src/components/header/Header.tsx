@@ -6,6 +6,13 @@ import LogoIcon from '../../assets/Icons/LogoIcon';
 const Header = () => {
   const navigate = useNavigate();
 
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      navigate('/');
+    }
+  };
+
   return (
     <Flex
       as="header"
@@ -18,10 +25,13 @@ const Header = () => {
       align="center"
       px={{ base: 3, sm: 4, md: 30, lg: 60, lgToXl: 50, xl: 180 }}
       maxH={100}
+      role="banner"
     >
       <Flex
         flex={1}
         mx="auto"
+        as="nav"
+        aria-label="Main navigation"
       >
         <Flex
           align="center"
@@ -30,12 +40,16 @@ const Header = () => {
         >
           <Box
             onClick={() => navigate('/')}
+            onKeyUp={handleKeyPress}
             cursor="pointer"
+            tabIndex={0}
+            role="button"
             aria-label="Navigate to homepage"
           >
             <LogoIcon
               width={150}
               height={75}
+              aria-hidden="true"
             />
           </Box>
 
@@ -45,6 +59,8 @@ const Header = () => {
             fontSize="md"
             color="white"
             _hover={{ textDecoration: 'underline' }}
+            aria-current={window.location.pathname === '/' ? 'page' : undefined}
+            aria-label="Navigate to homepage"
           >
             Home
           </Link>
@@ -54,6 +70,8 @@ const Header = () => {
             fontSize="md"
             color="white"
             _hover={{ textDecoration: 'underline' }}
+            aria-current={window.location.pathname === '/favorites' ? 'page' : undefined}
+            aria-label="Navigate to favorites page"
           >
             Favorites
           </Link>
