@@ -19,7 +19,7 @@ const MovieCard = (props: MovieCardProps) => {
 
   return (
     <Stack
-      bg="purple.900"
+      bg="purple.600"
       borderRadius="md"
       _hover={{ transform: 'scale(1.05)', transition: '0.3s' }}
       m={2}

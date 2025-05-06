@@ -26,7 +26,7 @@ const MovieItemList = (props: MovieCardProps) => {
 
   return (
     <HStack
-      bg="purple.900"
+      bg="purple.700"
       borderRadius="md"
       p={2}
       w="100%"
