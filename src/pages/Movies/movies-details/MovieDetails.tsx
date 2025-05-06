@@ -3,8 +3,9 @@ import { Box, Flex, Image, Text, VStack, Spinner, Center, Grid, GridItem, For, B
 import { useParams } from 'react-router-dom';
 
 import PosterNotFound from '../../../assets/images/poster-not-found.png';
-import FavoriteButton from './components/FavoriteButton';
+
 import TrailerModal from './components/TrailerModal';
+import { FavoriteButton } from '../../../components';
 
 function MovieDetails() {
   const { id } = useParams<{ id: string }>();
@@ -124,10 +125,7 @@ function MovieDetails() {
                 gap={2}
                 mt={{ base: 5, lg: 0 }}
               >
-                <FavoriteButton
-                  movie={movie}
-                  id={id}
-                />
+                <FavoriteButton movie={movie} />
                 <TrailerModal trailerURL={trailerUrl || undefined} />
               </Flex>
 

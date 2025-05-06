@@ -1,9 +1,10 @@
-import { Image, Text, Stack } from '@chakra-ui/react';
+import { Image, Text, Stack, HStack } from '@chakra-ui/react';
 import { Movie as MovieCardProps } from '@/types';
 import { useNavigate } from 'react-router-dom';
 
 import PosterNotFound from '../../assets/images/poster-not-found.png';
 import { useState } from 'react';
+import FavoriteButton from '../favorite-button/FavoriteButton';
 
 const MovieCard = (props: MovieCardProps) => {
   const navigate = useNavigate();
@@ -23,8 +24,6 @@ const MovieCard = (props: MovieCardProps) => {
       _hover={{ transform: 'scale(1.05)', transition: '0.3s' }}
       m={2}
       p={2}
-      onClick={() => navigate(`/movies/${props.imdbID}`)}
-      onKeyUp={handleKeyPress}
       cursor="button"
       role="button"
       tabIndex={0}
@@ -37,22 +36,35 @@ const MovieCard = (props: MovieCardProps) => {
         w={'100%'}
         h={'100%'}
         onError={() => setPosterImg(PosterNotFound)}
+        onClick={() => navigate(`/movies/${props.imdbID}`)}
+        onKeyUp={handleKeyPress}
       />
 
-      <Text
-        fontSize="lg"
-        fontWeight="bold"
-        color="white"
+      <HStack
+        justify="space-between"
+        px={1}
       >
-        {props.Title}
-      </Text>
+        <Stack
+          onClick={() => navigate(`/movies/${props.imdbID}`)}
+          onKeyUp={handleKeyPress}
+        >
+          <Text
+            fontSize="lg"
+            fontWeight="bold"
+            color="white"
+          >
+            {props.Title}
+          </Text>
 
-      <Text
-        fontSize="sm"
-        color="gray.400"
-      >
-        {props.Year}
-      </Text>
+          <Text
+            fontSize="sm"
+            color="gray.400"
+          >
+            {props.Year}
+          </Text>
+        </Stack>
+        <FavoriteButton movie={props} />
+      </HStack>
     </Stack>
   );
 };

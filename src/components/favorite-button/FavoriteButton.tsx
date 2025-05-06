@@ -1,18 +1,18 @@
 import { IconButton } from '@chakra-ui/react';
-import { Tooltip } from '../../../../components';
+import { Tooltip } from '../../components';
 import { MdOutlineStar, MdOutlineStarBorder } from 'react-icons/md';
-import { useMyMovieListStore } from '../../../../stores';
+import { useMyMovieListStore } from '../../stores';
 import { Movie } from '@/types';
-import { toaster } from '../../../../components/ui/toaster';
+import { toaster } from '../../components/ui/toaster';
 
 interface FavoriteButtonProps {
-  id: string | undefined;
   movie: Movie;
 }
 
-const FavoriteButton = ({ id, movie }: FavoriteButtonProps) => {
+const FavoriteButton = ({ movie }: FavoriteButtonProps) => {
   const { addFavorite, removeFavorite, favorites } = useMyMovieListStore();
-  const isFavorite = favorites.some((favorite) => favorite.imdbID === id);
+
+  const isFavorite = favorites.some((favorite) => favorite.imdbID === movie.imdbID);
 
   const handleClick = (movie: Movie) => {
     if (isFavorite) {
