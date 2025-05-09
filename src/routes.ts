@@ -13,7 +13,6 @@ const router = createBrowserRouter([
         index: true,
         Component: Home,
       },
-
       {
         path: '/movies/:id',
         Component: MovieDetails,
@@ -22,7 +21,6 @@ const router = createBrowserRouter([
         path: '/favorites',
         Component: Favorites,
       },
-      {},
     ],
   },
 ]);
