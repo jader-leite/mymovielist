@@ -7,7 +7,7 @@ import PosterNotFound from '../../../assets/images/poster-not-found.png';
 import TrailerModal from './components/TrailerModal';
 import { FavoriteButton } from '../../../components';
 
-function MovieDetails() {
+export default function MovieDetails() {
   const { id } = useParams<{ id: string }>();
 
   const { data: movie, loading, bgPosterUrl, genreList, trailerUrl } = useMovieById(id || '');
@@ -143,5 +143,3 @@ function MovieDetails() {
     </Box>
   );
 }
-
-export default MovieDetails;

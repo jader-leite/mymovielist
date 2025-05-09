@@ -3,7 +3,7 @@ import { Flex, Heading, Stack, StackSeparator, VStack } from '@chakra-ui/react';
 import { TbMovieOff } from 'react-icons/tb';
 import { useMyMovieListStore } from '../../stores';
 
-function Favorites() {
+export default function Favorites() {
   const { favorites } = useMyMovieListStore();
 
   const renderFavoriteContent = () => {
@@ -56,5 +56,3 @@ function Favorites() {
     </Flex>
   );
 }
-
-export default Favorites;
