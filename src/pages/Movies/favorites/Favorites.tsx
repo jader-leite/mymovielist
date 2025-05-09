@@ -1,7 +1,7 @@
-import { EmptyState, MovieItemList, SearchBar } from '../../components';
+import { EmptyState, MovieItemList, SearchBar } from '../../../components';
 import { Flex, Heading, Stack, StackSeparator, VStack } from '@chakra-ui/react';
 import { TbMovieOff } from 'react-icons/tb';
-import { useMyMovieListStore } from '../../stores';
+import { useMyMovieListStore } from '../../../stores';
 
 export default function Favorites() {
   const { favorites } = useMyMovieListStore();
