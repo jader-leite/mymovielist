@@ -76,68 +76,67 @@ function MovieDetails() {
                 w={300}
               />
             </GridItem>
-
-            <VStack
-              as={GridItem}
-              align="start"
-              justify="start"
-              height="100%"
-              px={{ base: 4, md: 50 }}
-              color="white"
-              colSpan={2}
-              justifyContent="space-between"
-            >
-              <Flex
-                direction="column"
-                gap={5}
+            <GridItem colSpan={2}>
+              <VStack
+                align="start"
+                justify="start"
+                height="100%"
+                px={{ base: 4, md: 50 }}
+                color="white"
+                justifyContent="space-between"
               >
-                <Text
-                  fontSize="4xl"
-                  fontWeight="bold"
-                  mt={{ base: 5, md: 0 }}
+                <Flex
+                  direction="column"
+                  gap={5}
                 >
-                  {movie.Title} ({movie.Year})
-                </Text>
+                  <Text
+                    fontSize="4xl"
+                    fontWeight="bold"
+                    mt={{ base: 5, md: 0 }}
+                  >
+                    {movie.Title} ({movie.Year})
+                  </Text>
+                  <Flex
+                    direction="row"
+                    align="center"
+                    wrap="wrap"
+                    gap={2}
+                  >
+                    <For each={genreList}>
+                      {(item, index) => (
+                        <Badge
+                          backgroundColor="purple.600"
+                          key={index}
+                        >
+                          {item}
+                        </Badge>
+                      )}
+                    </For>
+                    <Text fontWeight="bold"> {movie.Runtime}</Text>
+                  </Flex>
+                </Flex>
+
                 <Flex
                   direction="row"
                   align="center"
                   wrap="wrap"
                   gap={2}
+                  mt={{ base: 5, lg: 0 }}
                 >
-                  <For each={genreList}>
-                    {(item, index) => (
-                      <Badge
-                        backgroundColor="purple.600"
-                        key={index}
-                      >
-                        {item}
-                      </Badge>
-                    )}
-                  </For>
-                  <Text fontWeight="bold"> {movie.Runtime}</Text>
+                  <FavoriteButton movie={movie} />
+                  <TrailerModal trailerURL={trailerUrl || undefined} />
                 </Flex>
-              </Flex>
 
-              <Flex
-                direction="row"
-                align="center"
-                wrap="wrap"
-                gap={2}
-                mt={{ base: 5, lg: 0 }}
-              >
-                <FavoriteButton movie={movie} />
-                <TrailerModal trailerURL={trailerUrl || undefined} />
-              </Flex>
-
-              <Text
-                fontStyle="italic"
-                fontSize={{ base: 'md', md: 'lg' }}
-                maxW="800px"
-                mt={{ base: 5, lg: 0 }}
-              >
-                {movie.Plot}
-              </Text>
-            </VStack>
+                <Text
+                  fontStyle="italic"
+                  fontSize={{ base: 'md', md: 'lg' }}
+                  maxW="800px"
+                  mt={{ base: 5, lg: 0 }}
+                >
+                  {movie.Plot}
+                </Text>
+              </VStack>
+            </GridItem>
           </Grid>
         </Center>
       )}
