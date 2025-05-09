@@ -1,4 +1,4 @@
-import { EmptyState } from '../../../../components';
+import { EmptyState } from '..';
 import { AspectRatio, CloseButton, Dialog, IconButton, Portal } from '@chakra-ui/react';
 
 import { IoIosPlay } from 'react-icons/io';

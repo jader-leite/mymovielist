@@ -6,5 +6,6 @@ import MovieCard from './movie-card/MovieCard';
 import MovieItemList from './movie-item-list/MovieItemList';
 import SearchBar from './search-bar/SearchBar';
 import { Tooltip } from './ui/tooltip';
+import TrailerModal from './trailer-modal/TrailerModal';
 
-export { EmptyState, FavoriteButton, Footer, Header, MovieCard, MovieItemList, SearchBar, Tooltip };
+export { EmptyState, FavoriteButton, Footer, Header, MovieCard, MovieItemList, SearchBar, Tooltip, TrailerModal };
