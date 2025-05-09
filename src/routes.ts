@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router';
 import Home from '@/pages/home/Home';
 import Layout from '@/pages/Layout';
-import MovieDetails from '@/pages/movies/movies-details/MovieDetails';
-import Favorites from '@/pages/movies/favorites/Favorites';
+// import MovieDetails from '@/pages/movies/movies-details/MovieDetails';
+// import Favorites from '@/pages/movies/favorites/Favorites';
 
 const router = createBrowserRouter([
   {
@@ -13,14 +13,14 @@ const router = createBrowserRouter([
         index: true,
         Component: Home,
       },
-      {
-        path: '/movies/:id',
-        Component: MovieDetails,
-      },
-      {
-        path: '/favorites',
-        Component: Favorites,
-      },
+      // {
+      //   path: '/movies/:id',
+      //   Component: MovieDetails,
+      // },
+      // {
+      //   path: '/favorites',
+      //   Component: Favorites,
+      // },
     ],
   },
 ]);
