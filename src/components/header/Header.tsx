@@ -1,5 +1,5 @@
 import { Box, Flex, Link } from '@chakra-ui/react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import LogoIcon from '../../assets/Icons/LogoIcon';
 
@@ -54,8 +54,7 @@ const Header = () => {
           </Box>
 
           <Link
-            as={RouterLink}
-            to="/"
+            onClick={() => navigate('/')}
             fontSize="md"
             color="white"
             _hover={{ textDecoration: 'underline' }}
@@ -65,8 +64,7 @@ const Header = () => {
             Home
           </Link>
           <Link
-            as={RouterLink}
-            to="/favorites"
+            onClick={() => navigate('/favorites')}
             fontSize="md"
             color="white"
             _hover={{ textDecoration: 'underline' }}
