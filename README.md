@@ -2,6 +2,10 @@
 
 A modern movie list application built with React, TypeScript, and Chakra UI. Keep track of your favorite movies, discover new ones, and manage your watchlist all in one place.
 
+## 🌐 Live Demo
+
+Access the aplication at: [MyMovieList Live](https://mymovielist-seven.vercel.app/)
+
 ## ✨ Features
 
 - 🎯 Search for movies with real-time results
@@ -20,6 +24,7 @@ A modern movie list application built with React, TypeScript, and Chakra UI. Kee
 - [React Router](https://reactrouter.com/) - Routing
 - [Zustand](https://github.com/pmndrs/zustand) - State Management
 - [Axios](https://axios-http.com/) - HTTP Client
+- [Vercel](https://vercel.com/) - Deployment
 
 ## 🚀 Getting Started
 
