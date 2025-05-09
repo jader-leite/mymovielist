@@ -29,9 +29,15 @@ const HomePagination = (props: HomePaginationProps) => {
         </Pagination.PrevTrigger>
 
         <Pagination.Items
-          color={{ base: 'purple.950', _hover: 'white' }}
-          bg={{ base: 'transparent', _hover: 'purple.600' }}
-          render={(page) => <IconButton variant={{ base: 'ghost', _selected: 'outline' }}>{page.value}</IconButton>}
+          render={(page) => (
+            <IconButton
+              color={{ base: 'purple.950', _hover: 'white' }}
+              bg={{ base: 'transparent', _hover: 'purple.600' }}
+              variant={{ base: 'ghost', _selected: 'outline' }}
+            >
+              {page.value}
+            </IconButton>
+          )}
         />
 
         <Pagination.NextTrigger
