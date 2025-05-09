@@ -55,7 +55,7 @@ const Header = () => {
 
           <Link
             as={RouterLink}
-            onClick={() => navigate('/')}
+            to="/"
             fontSize="md"
             color="white"
             _hover={{ textDecoration: 'underline' }}
@@ -66,8 +66,7 @@ const Header = () => {
           </Link>
           <Link
             as={RouterLink}
-            href="/favorites"
-            onClick={() => navigate('/favorites')}
+            to="/favorites"
             fontSize="md"
             color="white"
             _hover={{ textDecoration: 'underline' }}
