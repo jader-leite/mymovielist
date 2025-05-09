@@ -1,11 +1,11 @@
-import { useMovieById } from '../../../hooks/useMovieById';
+import { useMovieById } from '../../hooks/useMovieById';
 import { Box, Flex, Image, Text, VStack, Spinner, Center, Grid, GridItem, For, Badge } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 
 import PosterNotFound from '../../../assets/images/poster-not-found.png';
 
-import TrailerModal from './components/TrailerModal';
-import { FavoriteButton } from '../../../components';
+import TrailerModal from './movies-details/components/TrailerModal';
+import { FavoriteButton } from '../../components';
 
 export default function MovieDetails() {
   const { id } = useParams<{ id: string }>();
